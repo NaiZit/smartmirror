@@ -5,7 +5,6 @@ body, html {
     overflow: hidden;
     font-family: sans-serif;
     color: white;
-    background: dimgrey;
 }
 
 #smart-mirror {
@@ -41,7 +40,7 @@ video {
 }
 
 .top-right:first-line {
-    font-size: 2vw;
+    font-size: 4vw;
     text-align: right;
     font-weight: bold;
     line-height: 120%;
@@ -66,7 +65,7 @@ video {
 }
 
 .bottom-right:first-line{
-    font-size: 1.5vw;
+    font-size: 4vw;
     font-weight: bold;
 }
 

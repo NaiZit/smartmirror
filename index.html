@@ -8,17 +8,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<div id="settings" class="hidden">
-    <h2>Einstellungen</h2>
-    <button id="close-settings">Schließen</button>
-    <!-- Hier könnten mehr Einstellungsoptionen hinzugefügt werden -->
-</div>
-
 <div id="smart-mirror">
     <video id="camera" autoplay="true" playsinline="true"></video>
     <div id="time" class="top-left"></div>
     <div id="weather" class="bottom-right"></div>
-    <div id="calendar" class="bottom-left"></div>
+    <button id="enablevoice" class="bottom-left">Activate Speech Output</button>
     <div id="tagesschau" class="top-right"></div>
 </div>
 <script src="script.js"></script>

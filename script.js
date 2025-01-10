@@ -9,7 +9,7 @@ $(document).ready(function () {
     let date;
     let intervalId = -1;
 
-    navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}})
+    navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}, audio: false})
         .then(stream =>
             document.getElementById("camera").srcObject = stream);
 
@@ -74,10 +74,18 @@ $(document).ready(function () {
         tts.text = `Es ist ${date} ${time}. Die Temperatur beträgt ${temperature} Grad Celsius.`;
         speechSynthesis.speak(tts);
     }
-    setTimeout(textToSpeech, 5000);
+    //setTimeout(textToSpeech, 5000);
     setInterval(textToSpeech, 60000);
 
     function startUp() {
         const test = 1;
     }
+
+    /**
+     * Needed to get the SpeechSynthesis to work on iOS devices.
+     */
+    document.getElementById("enablevoice").addEventListener("click", function() {
+        textToSpeech();
+        document.getElementById("enablevoice").style.display = "none";
+    });
 });
