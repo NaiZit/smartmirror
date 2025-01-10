@@ -37,18 +37,27 @@ $(document).ready(function () {
                 lat = position.coords.latitude;
                 lon = position.coords.longitude;
                 console.log(position)
+                const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
+                console.log(weatherUrl);
+                $.getJSON(weatherUrl, result => {
+                    console.log(result);
+                    const temperature = result.main.temp + "Grad Celsius";
+                    const weather = result.weather[0].description;
+                    document.getElementById("weather").innerHTML = temperature + "<br>" + weather;
+                })
             });
-            const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
-            console.log(weatherUrl);
-            $.getJSON(weatherUrl, result => {
-                console.log(result);
-                const temperature = result.main.temp + "Grad Celsius";
-                const weather = result.weather[0].description;
-                document.getElementById("weather").innerHTML = temperature + "<br>" + weather;
-            })
         }
     }
     setInterval(getWeather,10000000);
     getWeather();
+
+    function textToSpeech() {
+        var tts = new SpeechSynthesisUtterance();
+        tts.lang = "de-DE";
+        tts.text = `Es ist {date and time}. Die Temperatur beträgt {temperature} Grad Celsius. `
+        tts.
+    }
+
+
 
 });
