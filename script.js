@@ -29,16 +29,14 @@ $(document).ready(function () {
         var lat;
         var lon;
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => console.log(position));
-        }
-        //navigator.geolocation.getCurrentPosition((position) => {lat = position.coords.latitude; lon = position.coords.longitude; console.log(position)}, (positionError) => console.log(positionError));
-        // const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
-        // $.getJSON(weatherUrl, result => {
-        //     console.log(result);
-        //     const temperature = result.main.temp + "Grad Celsius";
-        //     const weather = result.weather[0].description;
-        //     document.getElementById("weather").innerHTML = temperature + "<br>" + weather;
-        //})
+            navigator.geolocation.getCurrentPosition((position) => {lat = position.coords.latitude; lon = position.coords.longitude; console.log(position)});
+        const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
+        $.getJSON(weatherUrl, result => {
+            console.log(result);
+            const temperature = result.main.temp + "Grad Celsius";
+            const weather = result.weather[0].description;
+            document.getElementById("weather").innerHTML = temperature + "<br>" + weather;
+        })
     }
     setInterval(getWeather,10000);
     getWeather();
