@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Smart Mirror</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="settings" class="hidden">
+    <h2>Einstellungen</h2>
+    <button id="close-settings">Schließen</button>
+    <!-- Hier könnten mehr Einstellungsoptionen hinzugefügt werden -->
+</div>
+
+<div id="smart-mirror">
+    <video id="camera" autoplay="true"></video>
+    <div id="time" class="top-left"></div>
+    <div id="weather" class="bottom-right"></div>
+    <div id="calendar" class="bottom-left"></div>
+    <div id="tagesschau" class="top-right"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

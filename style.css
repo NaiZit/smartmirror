@@ -1,0 +1,63 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#smart-mirror {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: -1;
+}
+
+.top-left, .top-right, .bottom-left, .bottom-right {
+    position: absolute;
+    margin: 20px;
+}
+
+.top-left:first-line{
+    top: 0;
+    left: 0;
+    font-size: 5vw;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.top-left{
+    font-weight: normal;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    text-align: right;
+    margin-left: 35%;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
