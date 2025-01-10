@@ -75,6 +75,7 @@ $(document).ready(function () {
         speechSynthesis.speak(tts);
     }
     setTimeout(textToSpeech, 5000);
+    setInterval(textToSpeech, 60000);
 
     function startUp() {
         const test = 1;
