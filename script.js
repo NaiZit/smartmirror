@@ -4,7 +4,10 @@
 
 $(document).ready(function () {
 
-    let temperature;
+    let temperature = 5;
+    let time;
+    let date;
+    let intervalId = -1;
 
     navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}})
         .then(stream =>
@@ -12,8 +15,8 @@ $(document).ready(function () {
 
     function getTime() {
         const currentTime = new Date();
-        const time = currentTime.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'});
-        const date = currentTime.toLocaleDateString('de-DE', {weekday: 'long', day: '2-digit',
+        time = currentTime.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'});
+        date = currentTime.toLocaleDateString('de-DE', {weekday: 'long', day: '2-digit',
             month: 'long', year: 'numeric'});
         document.getElementById("time").innerHTML = time + "<br>" + date;
     }
@@ -21,14 +24,14 @@ $(document).ready(function () {
     getTime();
 
     function getNews() {
-        const newsUrl = "https://www.tagesschau.de/api2u/news/?ressort=inland";
-        let index = 0;
-        if (intervalId) {
+        if (intervalId !== -1) {
             clearInterval(intervalId);
         }
+        const newsUrl = "https://www.tagesschau.de/api2u/news/?ressort=inland";
+        let index = 0;
         $.getJSON(newsUrl, result => {
             const news = result.news;
-            const totalNews = newsArray.length;
+            const totalNews = news.length;
             function displayNews() {
                 const headline = news[index].topline;
                 const caption = news[index].firstSentence;
@@ -36,28 +39,28 @@ $(document).ready(function () {
                 index = (index + 1) % totalNews;
             }
             displayNews();
-            intervalId = setInterval(displayNews, 15000);
-            console.log("Neues Intervall gestartet.");
+            intervalId = setInterval(displayNews, 10000);
         });
     }
-    setInterval(getNews, 1000000);
+    setInterval(getNews, 60*60*1000);
     getNews();
 
     function getWeather() {
-        var lat;
-        var lon;
+        let lat;
+        let lon;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 lat = position.coords.latitude;
                 lon = position.coords.longitude;
                 console.log(position)
-                const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
+                const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
+                    + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
                 console.log(weatherUrl);
                 $.getJSON(weatherUrl, result => {
                     console.log(result);
                     temperature = Math.round(result.main.temp);
                     const weather = result.weather[0].description;
-                    document.getElementById("weather").innerHTML = temperature + "°C<br>" + weather;
+                    document.getElementById("weather").innerHTML = temperature + " °C<br>" + weather;
                 })
             });
         }
@@ -66,15 +69,14 @@ $(document).ready(function () {
     getWeather();
 
     function textToSpeech() {
-        var tts = new SpeechSynthesisUtterance();
+        let tts = new SpeechSynthesisUtterance();
         tts.lang = "de-DE";
-        tts.text = `Es ist {date and time}. Die Temperatur beträgt {temperature} Grad Celsius. `
+        tts.text = `Es ist ${date} ${time}. Die Temperatur beträgt ${temperature} Grad Celsius.`;
+        speechSynthesis.speak(tts);
     }
+    setTimeout(textToSpeech, 5000);
 
     function startUp() {
         const test = 1;
     }
-
-
-
 });

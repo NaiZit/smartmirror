@@ -3,7 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
     color: white;
 }
 
@@ -29,22 +29,28 @@ video {
 }
 
 .top-left:first-line{
-    top: 0;
-    left: 0;
     font-size: 5vw;
-    font-family: sans-serif;
     font-weight: bold;
 }
 
 .top-left{
+    top: 0;
+    left: 0;
     font-weight: normal;
 }
 
-.top-right {
+.top-right:first-line {
+    font-size: 2vw;
+    text-align: right;
+    font-weight: bold;
+    line-height: 120%;
+}
+
+.top-right{
+    padding: 0.5%;
     top: 0;
     right: 0;
-    text-align: right;
-    margin-left: 35%;
+    font-weight: normal;
 }
 
 .bottom-left {
@@ -60,4 +66,8 @@ video {
 
 .hidden {
     display: none;
+}
+
+#tagesschau {
+    background: lightcoral;
 }
