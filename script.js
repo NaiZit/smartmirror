@@ -9,7 +9,7 @@ $(document).ready(function () {
     let date;
     let intervalId = -1;
 
-    navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}})
+    navigator.mediaDevices.getUserMedia({video: true})
         .then(stream =>
             document.getElementById("camera").srcObject = stream);
 
