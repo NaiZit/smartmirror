@@ -28,7 +28,10 @@ $(document).ready(function () {
     function getWeather() {
         var lat;
         var lon;
-        navigator.geolocation.getCurrentPosition((position) => {lat = position.coords.latitude; lon = position.coords.longitude; Console.log(position)}, (positionError) => console.log(positionError));
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => console.log(position));
+        }
+        //navigator.geolocation.getCurrentPosition((position) => {lat = position.coords.latitude; lon = position.coords.longitude; console.log(position)}, (positionError) => console.log(positionError));
         // const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
         // $.getJSON(weatherUrl, result => {
         //     console.log(result);
