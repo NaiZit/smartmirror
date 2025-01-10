@@ -4,6 +4,8 @@
 
 $(document).ready(function () {
 
+    let temperature;
+
     navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}})
         .then(stream =>
             document.getElementById("camera").srcObject = stream);
@@ -20,11 +22,23 @@ $(document).ready(function () {
 
     function getNews() {
         const newsUrl = "https://www.tagesschau.de/api2u/news/?ressort=inland";
+        let index = 0;
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
         $.getJSON(newsUrl, result => {
-            const headline = result.news[0].topline;
-            const caption = result.news[0].firstSentence;
-            document.getElementById("tagesschau").innerHTML = headline + "<br>" + caption;
-        })
+            const news = result.news;
+            const totalNews = newsArray.length;
+            function displayNews() {
+                const headline = news[index].topline;
+                const caption = news[index].firstSentence;
+                document.getElementById("tagesschau").innerHTML = headline + "<br>" + caption;
+                index = (index + 1) % totalNews;
+            }
+            displayNews();
+            intervalId = setInterval(displayNews, 15000);
+            console.log("Neues Intervall gestartet.");
+        });
     }
     setInterval(getNews, 1000000);
     getNews();
@@ -41,9 +55,9 @@ $(document).ready(function () {
                 console.log(weatherUrl);
                 $.getJSON(weatherUrl, result => {
                     console.log(result);
-                    const temperature = result.main.temp + "Grad Celsius";
+                    temperature = Math.round(result.main.temp);
                     const weather = result.weather[0].description;
-                    document.getElementById("weather").innerHTML = temperature + "<br>" + weather;
+                    document.getElementById("weather").innerHTML = temperature + "°C<br>" + weather;
                 })
             });
         }
@@ -55,6 +69,10 @@ $(document).ready(function () {
         var tts = new SpeechSynthesisUtterance();
         tts.lang = "de-DE";
         tts.text = `Es ist {date and time}. Die Temperatur beträgt {temperature} Grad Celsius. `
+    }
+
+    function startUp() {
+        const test = 1;
     }
 
 
