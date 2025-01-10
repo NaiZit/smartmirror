@@ -55,7 +55,6 @@ $(document).ready(function () {
         var tts = new SpeechSynthesisUtterance();
         tts.lang = "de-DE";
         tts.text = `Es ist {date and time}. Die Temperatur beträgt {temperature} Grad Celsius. `
-        tts.
     }
 
 
