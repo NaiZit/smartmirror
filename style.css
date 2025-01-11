@@ -1,3 +1,5 @@
+/*CSS nach Github-Vorlage anpassen, Code kommentieren*/
+/*Allgemein gültig*/
 body, html {
     margin: 0;
     padding: 0;
@@ -11,6 +13,9 @@ body, html {
     position: relative;
     height: 100%;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: 1fr 4fr 1fr;
 }
 
 video {
@@ -19,60 +24,177 @@ video {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
     z-index: -1;
 }
 
-.top-left, .top-right, .bottom-left, .bottom-right {
+.news, .time, .weather, .button {
+    font-size: 12pt;
+    position: relative;
+    margin: 2vw;
+}
+
+.time:first-line {
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.contrast-up {
+    background: black;
+    opacity: 0.5;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-row-end: 2;
+    grid-column-end: 4;
+}
+
+.contrast-down {
+    background: black;
+    opacity: 0.5;
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-row-end: 4;
+    grid-column-end: 4;
+}
+
+.time {
+    font-weight: normal;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.weather:first-line{
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.weather {
+    font-weight: normal;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    text-align: end;
     position: absolute;
-    margin: 20px;
-}
-
-.top-left:first-line{
-    font-size: 5vw;
-    font-weight: bold;
-}
-
-.top-left{
-    top: 0;
-    left: 0;
-    font-weight: normal;
-}
-
-.top-right:first-line {
-    font-size: 4vw;
-    text-align: right;
-    font-weight: bold;
-    line-height: 120%;
-}
-
-.top-right{
-    padding: 0.5%;
-    top: 0;
-    right: 0;
-    font-weight: normal;
-}
-
-.bottom-left {
-    bottom: 0;
-    left: 0;
-}
-
-.bottom-right {
     bottom: 0;
     right: 0;
+}
+
+.button {
+    font-weight: normal;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    text-align: center;
+}
+
+.news {
+    font-weight: normal;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
     text-align: right;
 }
 
-.bottom-right:first-line{
-    font-size: 4vw;
+.headline {
+    font-size: 15pt;
     font-weight: bold;
 }
 
-.hidden {
-    display: none;
+@media screen and(min-width: 576px) {
+    /*.news, .time, .weather, .button {*/
+    /*    font-size: 36pt;*/
+    /*}*/
+    .contrast-up {
+        background-color: red;
+    }
+
 }
 
-#tagesschau {
-    background: lightcoral;
+@media screen and(min-width: 768px) {
+    .contrast-up {
+        background-color: red;
+    }
 }
+
+@media screen and(min-width: 992px) {
+    .contrast-up {
+        background-color: red;
+    }
+}
+
+@media screen and(min-width: 1200px) {
+    .contrast-up {
+        background-color: red;
+    }
+}
+
+@media screen and(min-width: 1400px) {
+    .contrast-up {
+        background-color: red;
+    }
+}
+
+
+/*@media screen and (min-width: landscape) {*/
+
+/*    .top-left:first-line {*/
+/*        font-size: 5vw;*/
+/*    }*/
+
+/*    .top-left {*/
+/*        text-decoration: black;*/
+/*        font-size: 1.5vw;*/
+/*        top: 0;*/
+/*        left: 0;*/
+/*        font-weight: normal;*/
+/*    }*/
+
+/*    .top-right:first-line {*/
+/*        width: 50vw;*/
+/*        font-size: 3vw;*/
+/*        font-weight: bold;*/
+/*        !*line-height: 10vh;*!*/
+/*    }*/
+
+/*    .top-right {*/
+/*        font-size: 1.5vw;*/
+/*        width: 40vw;*/
+/*        padding: 0.5vh;*/
+/*        text-align: right;*/
+/*        top: 0;*/
+/*        right: 0;*/
+/*        font-weight: normal;*/
+/*    }*/
+
+/*    .bottom-left {*/
+/*        -webkit-text-stroke: 0px transparent;*/
+/*        padding: 0;*/
+/*        text-align: center;*/
+/*        text-wrap: pretty;*/
+/*        font-size: 0.70vw;*/
+/*        bottom: 0;*/
+/*        left: 0;*/
+/*        width: 6vw;*/
+/*        height: 6vw;*/
+/*    }*/
+
+/*    .bottom-left:hover {*/
+/*        color: blue;*/
+/*    }*/
+
+/*    .bottom-right {*/
+/*        bottom: 0;*/
+/*        right: 0;*/
+/*        text-align: right;*/
+/*    }*/
+
+/*    .bottom-right:first-line {*/
+/*        font-size: 4vw;*/
+/*        font-weight: bold;*/
+/*    }*/
+/*}*/

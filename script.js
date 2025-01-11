@@ -9,9 +9,25 @@ $(document).ready(function () {
     let date;
     let intervalId = -1;
 
-    navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}, audio: false})
-        .then(stream =>
-            document.getElementById("camera").srcObject = stream);
+    startUp();
+
+
+    function startUp() {
+        getCamera();
+        enableTTS();
+        setInterval(getWeather,60*60*1000);
+        getWeather();
+        setInterval(getNews, 60*60*1000);
+        getNews();
+        setInterval(getTime,750);
+        getTime();
+    }
+
+    function getCamera() {
+        navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}, audio: false})
+            .then(stream =>
+                document.getElementById("camera").srcObject = stream);
+    }
 
     function getTime() {
         const currentTime = new Date();
@@ -20,8 +36,6 @@ $(document).ready(function () {
             month: 'long', year: 'numeric'});
         document.getElementById("time").innerHTML = time + "<br>" + date;
     }
-    setInterval(getTime,1000);
-    getTime();
 
     function getNews() {
         if (intervalId !== -1) {
@@ -35,15 +49,14 @@ $(document).ready(function () {
             function displayNews() {
                 const headline = news[index].topline;
                 const caption = news[index].firstSentence;
-                document.getElementById("tagesschau").innerHTML = headline + "<br>" + caption;
+                document.getElementById("headline").innerHTML = headline;
+                document.getElementById("caption").innerHTML = caption;
                 index = (index + 1) % totalNews;
             }
             displayNews();
-            intervalId = setInterval(displayNews, 10000);
+            intervalId = setInterval(displayNews, 20000);
         });
     }
-    setInterval(getNews, 60*60*1000);
-    getNews();
 
     function getWeather() {
         let lat;
@@ -52,21 +65,18 @@ $(document).ready(function () {
             navigator.geolocation.getCurrentPosition((position) => {
                 lat = position.coords.latitude;
                 lon = position.coords.longitude;
-                console.log(position)
                 const weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon
                     + "&appid=83d5a97742f7e91e7f0e5a2ee80e15ab&lang=de&units=metric";
-                console.log(weatherUrl);
                 $.getJSON(weatherUrl, result => {
-                    console.log(result);
                     temperature = Math.round(result.main.temp);
                     const weather = result.weather[0].description;
-                    document.getElementById("weather").innerHTML = temperature + " °C<br>" + weather;
+                    document.getElementById("weather").innerHTML = temperature + "°C<br>" + weather;
                 })
             });
         }
     }
-    setInterval(getWeather,10000000);
-    getWeather();
+
+    document.getElementById("weather").innerHTML = "10°C<br>Bewölkt";
 
     function textToSpeech() {
         let tts = new SpeechSynthesisUtterance();
@@ -74,18 +84,15 @@ $(document).ready(function () {
         tts.text = `Es ist ${date} ${time}. Die Temperatur beträgt ${temperature} Grad Celsius.`;
         speechSynthesis.speak(tts);
     }
-    //setTimeout(textToSpeech, 5000);
-    setInterval(textToSpeech, 60000);
-
-    function startUp() {
-        const test = 1;
-    }
 
     /**
      * Needed to get the SpeechSynthesis to work on iOS devices.
      */
-    document.getElementById("enablevoice").addEventListener("click", function() {
-        textToSpeech();
-        document.getElementById("enablevoice").style.display = "none";
-    });
+    function enableTTS() {
+        document.getElementById("enablevoice").addEventListener("click", function() {
+            textToSpeech();
+            setInterval(textToSpeech, 60000);
+            document.getElementById("enablevoice").style.display = "none";
+        });
+    }
 });

@@ -10,10 +10,15 @@
 <body>
 <div id="smart-mirror">
     <video id="camera" autoplay="true" playsinline="true"></video>
-    <div id="time" class="top-left"></div>
-    <div id="weather" class="bottom-right"></div>
-    <button id="enablevoice" class="bottom-left">Activate Speech Output</button>
-    <div id="tagesschau" class="top-right"></div>
+    <div class="contrast-up"></div>
+    <div class="contrast-down"></div>
+    <div id="time" class="time"></div>
+    <div id="weather" class="weather"></div>
+    <button id="enablevoice" class="button">Sprachausgabe aktivieren</button>
+    <div id="tagesschau" class="news">
+        <div id="headline" class="headline"></div>
+        <div id="caption" class=""></div>
+    </div>
 </div>
 <script src="script.js"></script>
 </body>
